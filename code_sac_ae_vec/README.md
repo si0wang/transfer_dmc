@@ -1,7 +1,7 @@
 ## Instructions
-To train an SAC+AE agent on the `cheetah run` task from image-based observations  run:
+To train an SAC+AE agent on the `cheetah run` task from vector-based observations  run:
 ```
-CUDA_VISIBLE_DEVICES=1 python train.py --domain_name cheetah --task_name run --encoder_type pixel --decoder_type pixel --action_repeat 4 --work_dir ./log --seed 1
+CUDA_VISIBLE_DEVICES=1 python train.py --domain_name cheetah --task_name run --encoder_type identity --decoder_type identity --action_repeat 4 --work_dir ./log_source --seed 1
 ```
 This will produce 'log' folder, where all the outputs are going to be stored including train/eval logs, tensorboard blobs, and evaluation episode videos. One can attacha tensorboard to monitor training by running:
 ```
@@ -30,9 +30,3 @@ while an evaluation entry:
 | eval | S: 0 | ER: 21.1676
 ```
 which just tells the expected reward `ER` evaluating current policy after `S` steps. Note that `ER` is average evaluation performance over `num_eval_episodes` episodes (usually 10).
-
-## Results
-Our method demonstrates significantly improved performance over the baseline SAC:pixel. It matches the state-of-the-art performance of model-based algorithms, such as PlaNet (Hafner et al., 2018) and SLAC (Lee et al., 2019), as well
-as a model-free algorithm D4PG (Barth-Maron et al., 2018), that also learns from raw images. Our
-algorithm exhibits stable learning across ten random seeds and is extremely easy to implement.
-![Results](results/graph.png)
